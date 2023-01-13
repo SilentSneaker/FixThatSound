@@ -37,14 +37,17 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
     private boolean mAutoRecognizing = false;
     private boolean initState = false;
 
-    private final MediaPlayer mediaPlayer = new MediaPlayer();
-    private final boolean isPlaying = false;
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private boolean isPlaying = false;
+
+    private String path = "";
 
     private long startTime = 0;
     private long stopTime = 0;
 
     private final int PRINT_MSG = 1001;
 
+    private ACRCloudConfig mConfig = null;
     private ACRCloudClient mClient = null;
 
     @Override
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String path = Environment.getExternalStorageDirectory().toString()
+        path = Environment.getExternalStorageDirectory().toString()
                 + "/acrcloud";
         Log.e(TAG, path);
 
@@ -61,21 +64,43 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
             file.mkdirs();
         }
 
-        mVolume = findViewById(R.id.volume);
-        mResult = findViewById(R.id.result);
-        tv_time = findViewById(R.id.time);
+        mVolume = (TextView) findViewById(R.id.volume);
+        mResult = (TextView) findViewById(R.id.result);
+        tv_time = (TextView) findViewById(R.id.time);
 
-        mResult.setOnClickListener(view -> {
-            Result = (String) mResult.getText();
-            startActivity(new Intent(MainActivity.this, ResultScreen.class));
+        mResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Result = (String) mResult.getText();
+                startActivity(new Intent(MainActivity.this, ResultScreen.class));
+            }
         });
 
-        findViewById(R.id.start).setOnClickListener(view -> start());
+        findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                start();
+            }
+        });
 
         findViewById(R.id.cancel).setOnClickListener(
-                v -> cancel());
+                new View.OnClickListener() {
 
-        findViewById(R.id.request_radio_meta).setOnClickListener(view -> requestRadioMetadata());
+                    @Override
+                    public void onClick(View v) {
+                        cancel();
+
+                    }
+                });
+
+        findViewById(R.id.request_radio_meta).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                requestRadioMetadata();
+            }
+        });
 
         Switch sb = findViewById(R.id.auto_switch);
         sb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -91,25 +116,25 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
 
         verifyPermissions();
 
-        ACRCloudConfig mConfig = new ACRCloudConfig();
+        this.mConfig = new ACRCloudConfig();
 
-        mConfig.acrcloudListener = this;
-        mConfig.context = this;
+        this.mConfig.acrcloudListener = this;
+        this.mConfig.context = this;
 
         // Please create project in "http://console.acrcloud.cn/service/avr".
-        mConfig.host = "identify-eu-west-1.acrcloud.com";
-        mConfig.accessKey = "7750fa0e9c09a9af33e903cb3cf7b099";
-        mConfig.accessSecret = "FksbMnOLxerJvnm49Dot9TFU6kZzeUUElRB9oYWp";
+        this.mConfig.host = "identify-eu-west-1.acrcloud.com";
+        this.mConfig.accessKey = "7750fa0e9c09a9af33e903cb3cf7b099";
+        this.mConfig.accessSecret = "FksbMnOLxerJvnm49Dot9TFU6kZzeUUElRB9oYWp";
 
         // auto recognize access key
-        mConfig.hostAuto = "identify-eu-west-1.acrcloud.com";
-        mConfig.accessKeyAuto = "7750fa0e9c09a9af33e903cb3cf7b099";
-        mConfig.accessSecretAuto = "FksbMnOLxerJvnm49Dot9TFU6kZzeUUElRB9oYWp";
+        this.mConfig.hostAuto = "identify-eu-west-1.acrcloud.com";
+        this.mConfig.accessKeyAuto = "7750fa0e9c09a9af33e903cb3cf7b099";
+        this.mConfig.accessSecretAuto = "FksbMnOLxerJvnm49Dot9TFU6kZzeUUElRB9oYWp";
 
-        mConfig.recorderConfig.rate = 8000;
-        mConfig.recorderConfig.channels = 1;
+        this.mConfig.recorderConfig.rate = 8000;
+        this.mConfig.recorderConfig.channels = 1;
 
-        mConfig.acrcloudPartnerDeviceInfo = new IACRCloudPartnerDeviceInfo() {
+        this.mConfig.acrcloudPartnerDeviceInfo = new IACRCloudPartnerDeviceInfo() {
             @Override
             public String getGPS() {
                 return null;
@@ -132,12 +157,12 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
         };
 
         // If you do not need volume callback, you set it false.
-        mConfig.recorderConfig.isVolumeCallback = true;
+        this.mConfig.recorderConfig.isVolumeCallback = true;
 
         this.mClient = new ACRCloudClient();
         ACRCloudLogger.setLog(true);
 
-        this.initState = this.mClient.initWithConfig(mConfig);
+        this.initState = this.mClient.initWithConfig(this.mConfig);
     }
 
     public void start() {
@@ -264,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
     }
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static final String[] PERMISSIONS = {
+    private static String[] PERMISSIONS = {
             Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.ACCESS_WIFI_STATE,
             Manifest.permission.INTERNET,

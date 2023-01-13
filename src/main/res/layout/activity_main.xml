@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.acrcloud.acrclouduniversalsdkdemo.MainActivity">
+
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="246dp"
+        android:layout_height="249dp"
+        android:layout_marginTop="104dp"
+        android:src="@drawable/playbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/request_radio_meta" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+
+    <Button
+        android:id="@+id/request_radio_meta"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:text="@string/request_radio_meta"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/auto_switch_label"
+        android:layout_width="120dp"
+        android:layout_height="52dp"
+        android:text="@string/auto_switch_label"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/auto_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textOff="@string/auto_switch_open"
+        android:textOn="@string/auto_switch_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auto_switch_label" />
+
+    <TextView
+        android:id="@+id/volume"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:padding="@android:dimen/app_icon_size"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cancel" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="fill_parent"
+        android:layout_height="225dp"
+        android:clickable="false"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volume" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -323,4 +323,8 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
         mResult.setText(s);
         mResult.setClickable(true);
     }
+
+    public void Profile(View view) {
+        startActivity(new Intent(MainActivity.this, Maintenance.class));
+    }
 }

@@ -10,7 +10,6 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-
         android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +19,6 @@
         android:id="@+id/Profile"
         android:layout_width="100dp"
         android:layout_height="100dp"
-
         android:onClick="Profile"
         android:src="@mipmap/siloette"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +29,7 @@
         android:id="@+id/home"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:onClick="Profile"
+        android:onClick="home"
         android:src="@mipmap/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

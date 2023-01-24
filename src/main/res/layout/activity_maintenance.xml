@@ -19,15 +19,27 @@
         android:id="@+id/OilTextDate"
         android:layout_width="250dp"
         android:layout_height="35dp"
+        android:clickable="true"
         android:gravity="center_horizontal"
         android:hint="Oil"
-        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintVertical_bias="0.295" />
+
+    <TextView
+        android:id="@+id/MakeModel"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="48dp"
+        android:gravity="center_horizontal"
+
+        android:hint="Make/Model"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/transmission"
@@ -35,19 +47,19 @@
         android:layout_height="35dp"
         android:layout_marginTop="36dp"
         android:gravity="center_horizontal"
-        android:hint="Air Filter"
+        android:hint="Transmission"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/OilTextDate" />
 
     <TextView
-        android:id="@+id/battery"
+        android:id="@+id/AirFilter"
         android:layout_width="250dp"
         android:layout_height="35dp"
         android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
-        android:hint="Battery"
+        android:hint="Air Filter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/transmission" />
@@ -56,22 +68,21 @@
         android:id="@+id/Profile"
         android:layout_width="106dp"
         android:layout_height="104dp"
-
-        android:onClick="Profile"
+        android:clickable="true"
         android:src="@mipmap/siloette"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/battery" />
+        app:layout_constraintTop_toBottomOf="@+id/AirFilter" />
 
     <ImageView
         android:id="@+id/home"
         android:layout_width="106dp"
         android:layout_height="104dp"
-        android:onClick="Profile"
+        android:clickable="true"
         android:src="@mipmap/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/battery" />
+        app:layout_constraintTop_toBottomOf="@+id/AirFilter" />
 
 
 </android.support.constraint.ConstraintLayout>

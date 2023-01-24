@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,10 +30,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements IACRCloudListener, IACRCloudRadioMetadataListener {
 
     private final static String TAG = "MainActivity";
-
     private TextView mVolume, mResult, tv_time;
 
+    public static Car car;
     public static String  Result;
+    public static String Fix;
     private boolean mProcessing = false;
     private boolean mAutoRecognizing = false;
     private boolean initState = false;
@@ -67,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
         mVolume = (TextView) findViewById(R.id.volume);
         mResult = (TextView) findViewById(R.id.result);
         tv_time = (TextView) findViewById(R.id.time);
+        ImageView home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         mResult.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +104,11 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
                 });
 
         findViewById(R.id.request_radio_meta).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 requestRadioMetadata();
             }
         });
-
         Switch sb = findViewById(R.id.auto_switch);
         sb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -113,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
                 }
             }
         });
-
         verifyPermissions();
 
         this.mConfig = new ACRCloudConfig();
@@ -174,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
         if (!mProcessing) {
             mProcessing = true;
             mVolume.setText("");
-            mResult.setText("");
+            mResult.setText("Listening Please wait.");
             if (this.mClient == null || !this.mClient.startRecognize()) {
                 mProcessing = false;
                 mResult.setText("start error!");
@@ -227,8 +233,8 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
     }
 
     public void reset() {
-        tv_time.setText("");
-        mResult.setText("");
+        tv_time.setText("Time: ");
+        mResult.setText("Problem: ");
         mProcessing = false;
     }
 
@@ -264,21 +270,28 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
                         JSONArray artistt = tt.getJSONArray("artists");
                         JSONObject art = (JSONObject) artistt.get(0);
                         String artist = art.getString("name");
-                        tres = tres + (i+1) + ".  Title: " + title + "    Artist: " + artist + "\n";
+                        tres = /*tres + (i+1) + ".  Error: " + */title/* + "    Artist: " + artist + "\n"*/;
+                        Fix = car.make+ " "+ car.model+ " " +"https://www.google.com/search?q="+title.replaceAll(" ", "+") + "+repair";
                     }
                 }
 
                 tres = tres + "\n\n" + result;
             }else{
-                tres = result;
+                tres = "No Result Found";
             }
         } catch (JSONException e) {
             tres = result;
             e.printStackTrace();
         }
+        if(tres == "No Result Found") {
+            mResult.setClickable(false);
+            mResult.setText(tres);
+        }
+        else {
+            mResult.setText(result);
+            mResult.setClickable(true);
+        }
 
-        mResult.setText(tres);
-        mResult.setClickable(true);
         startTime = System.currentTimeMillis();
     }
 
@@ -286,6 +299,7 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
     public void onVolumeChanged(double volume) {
         long time = (System.currentTimeMillis() - startTime) / 1000;
         mVolume.setText(getResources().getString(R.string.volume) + volume + "\n\nTime: " + time + " s");
+        tv_time.setText("Time: "+time);
     }
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;

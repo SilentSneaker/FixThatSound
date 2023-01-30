@@ -10,7 +10,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -28,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements IACRCloudListener, IACRCloudRadioMetadataListener {
-
+    int change;
     private final static String TAG = "MainActivity";
     private TextView mVolume, mResult, tv_time;
 
@@ -185,6 +189,8 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
                 mProcessing = false;
                 mResult.setText("start error!");
             }
+            ImageButton button = findViewById(R.id.start);
+
             startTime = System.currentTimeMillis();
         }
     }
@@ -300,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements IACRCloudListener
         long time = (System.currentTimeMillis() - startTime) / 1000;
         mVolume.setText(getResources().getString(R.string.volume) + volume + "\n\nTime: " + time + " s");
         tv_time.setText("Time: "+time);
+
     }
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;

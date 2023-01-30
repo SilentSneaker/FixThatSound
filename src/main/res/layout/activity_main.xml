@@ -8,13 +8,14 @@
 
     <ImageButton
         android:id="@+id/start"
-        android:layout_width="190dp"
-        android:layout_height="168dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginTop="56dp"
-        android:contentDescription="PlayButton"
         android:src="@mipmap/playbutton"
+        android:contentDescription="PlayButton"
+        android:background="@drawable/play_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +26,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/cancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start" />
+        app:layout_constraintTop_toBottomOf="@+id/start"
+        android:contentDescription="Stop listening and resets volume and time to zero."/>
 
     <Button
         android:id="@+id/request_radio_meta"
@@ -52,10 +54,11 @@
         android:id="@+id/volume"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:textSize="20dp"
+        android:layout_marginTop="56dp"
         android:text="Volume:"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cancel" />
+        app:layout_constraintTop_toBottomOf="@+id/start" />
 
     <TextView
         android:id="@+id/result"

@@ -66,6 +66,7 @@ public class Maintenance extends AppCompatActivity {
         }
 
 
+
         makeModel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,7 +128,7 @@ public class Maintenance extends AppCompatActivity {
                         Car.oilDay = day;
                         Car.oilMonth = month;
                         if (changeOil < 90)
-                            oil.setText("Last oil change was "+ c + " Day(s) ago.");
+                            oil.setText("Last oil change was "+ c + " Day(s) ago and should still be okay.");
                         else
                             oil.setText("Last oil change was "+ c + " Day(s) ago and needs to be changed");
 
@@ -154,9 +155,9 @@ public class Maintenance extends AppCompatActivity {
                         Car.transmissionDay = day;
                         Car.transmissionMonth = month;
                         if (changeTransmission < 1460)
-                            transmission.setText("Last Transmission Fluid change was "+ c + " Day(s) ago.");
+                            transmission.setText("Last Transmission Fluid change was "+ c + " Day(s) ago and should still be okay.");
                         else
-                            transmission.setText("Last Transmission Fluid change was "+ c + " Day(s) ago and needs to be changed");
+                            transmission.setText("Last Transmission Fluid change was "+ c + " Day(s) ago and needs to be changed.");
 
                     }
                 }, Car.transmissionYear, Car.transmissionMonth, Car.transmissionDay );
@@ -181,7 +182,7 @@ public class Maintenance extends AppCompatActivity {
                         Car.airFilterDay = day;
                         Car.airFilterMonth = month;
                         if (changeAirFilter<180)
-                        airFilter.setText("Last Air Filter change was "+ c + " Day(s) ago.");
+                        airFilter.setText("Last Air Filter change was "+ c + " Day(s) ago and should still be okay.");
                         else
                             airFilter.setText("Last Air Filter change was "+ c + " Day(s) ago and needs to be changed");
 
